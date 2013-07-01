@@ -10,41 +10,44 @@ Taxes.taxRate = 0.06; // 住民税率
 
 var OpenSpending = OpenSpending || {};
 
-OpenSpending.identifier = 'yokohama_budget';
-OpenSpending.year = '2012';
+OpenSpending.identifier = 'suita_city_budget';
+OpenSpending.year = '2013';
 
 OpenSpending.Styles = OpenSpending.Styles || {};
 
 OpenSpending.Styles.Cofog = {
 
-  /* yokohama cofog */
-  '1': { icon: 'icons/helping-others.svg', color: '#C75746', bcolor: '#935B3B' },
-  '1-1': { icon: 'icons/helping-others.svg', color: '#C75746', bcolor: '#935B3B' },
-  '2': { icon: 'icons/schools.svg', color: '#C75746', bcolor: '#0AB971' },
-  '2-1': { icon: 'icons/pre-school.svg', color: '#C75746', bcolor: '#0AB971' },
-  '2-2': { icon: 'icons/education.svg', color: '#C75746', bcolor: '#0AB971' },
-  '3': { icon: 'icons/economy-tourism.svg', color: '#C75746', bcolor: '#4E6D00' },
-  '3-1': { icon: 'icons/dollar.svg', color: '#C75746', bcolor: '#4E6D00' },
-  '3-2': { icon: 'icons/harbor.svg', color: '#C75746', bcolor: '#4E6D00' },
-  '3-3': { icon: 'icons/culture.svg', color: '#C75746', bcolor: '#4E6D00' },
-  '4': { icon: 'icons/our-streets.svg', color: '#C75746', bcolor: '#D33673' },
-  '4-1': { icon: 'icons/farms.svg', color: '#C75746', bcolor: '#D33673' },
-  '4-2': { icon: 'icons/street-lights.svg', color: '#C75746', bcolor: '#D33673' },
-  '4-3': { icon: 'icons/housing.svg', color: '#C75746', bcolor: '#D33673' },
-  '5': { icon: 'icons/environment.svg', color: '#C75746', bcolor: '#2A3A03' },
-  '5-1': { icon: 'icons/tree.svg', color: '#C75746', bcolor: '#2A3A03'  },
-  '5-2': { icon: 'icons/wind.svg', color: '#C75746', bcolor: '#2A3A03'  },
-  '6': { icon: 'icons/civilian-action.svg', color: '#C75746', bcolor: '#EC2406' },
-  '6-1': { icon: 'icons/civilian-action.svg', color: '#C75746', bcolor: '#EC2406' },
-  '7': { icon: 'icons/traffic-watersup.svg', color: '#C75746', bcolor: '#938626' },
-  '7-1': { icon: 'icons/traffic-watersup.svg', color: '#C75746', bcolor: '#938626' },
-  '8': { icon: 'icons/government.svg', color: '#C75746', bcolor: '#C75746' },
-  '8-1': { icon: 'icons/publicaffairs.svg', color: '#C75746', bcolor: '#C75746' },
-  '8-2': { icon: 'icons/government.svg', color: '#C75746', bcolor: '#C75746' },
-  '9': { icon: 'icons/garbage.svg', color: '#C75746', bcolor: '#D33673' },
-  '9-1': { icon: 'icons/garbage.svg', color: '#C75746', bcolor: '#D33673' },
-  '10': { icon: 'icons/order-safety.svg', color: '#C75746', bcolor: '#790586' },
-  '10-1': { icon: 'icons/order-safety.svg', color: '#C75746', bcolor: '#790586' }
+  /* suita cofog */
+  // 子育て・教育
+  '1': { icon: 'icons/family.svg', color: '#C75746', bcolor: '#935B3B' },
+  '101': { icon: 'icons/education.svg', color: '#C75746', bcolor: '#935B3B' }, // 教育費
+  // 福祉・健康・環境保全
+  '2': { icon: 'icons/helping-others.svg', color: '#C75746', bcolor: '#935B3B' },
+  '201': { icon: 'icons/wheelchair.svg', color: '#C75746', bcolor: '#935B3B' }, // 民生費
+  '202': { icon: 'icons/health.svg', color: '#C75746', bcolor: '#935B3B' }, // 衛生費
+  // 産業・仕事
+  '3': { icon: 'icons/extras/sangyou3.svg', color: '#C75746', bcolor: '#935B3B' },
+  '301': { icon: 'icons/extras/c_nougyou.svg', color: '#C75746', bcolor: '#935B3B' }, // 農業費
+  '302': { icon: 'icons/extras/c_syoukougyou.svg', color: '#C75746', bcolor: '#935B3B' }, // 商工費
+  '303': { icon: 'icons/unemployment.svg', color: '#C75746', bcolor: '#935B3B' }, // 労働費
+  // まちづくり
+  '4': { icon: 'icons/extras/machi.svg', color: '#C75746', bcolor: '#935B3B' },
+  '401': { icon: 'icons/coal.svg', color: '#C75746', bcolor: '#935B3B' }, // 土木費
+  // 安全・防災
+  '5': { icon: 'icons/fire-brigade.svg', color: '#C75746', bcolor: '#935B3B' },
+  '501': { icon: 'icons/fire-brigade.svg', color: '#C75746', bcolor: '#935B3B' }, // 消防費
+  // 議会
+  '6': { icon: 'icons/legislative.svg', color: '#C75746', bcolor: '#935B3B' },
+  '601': { icon: 'icons/legislative.svg', color: '#C75746', bcolor: '#935B3B' }, // 議会費
+  // 公債
+  '7': { icon: 'icons/economic-aid.svg', color: '#C75746', bcolor: '#935B3B' },
+  '701': { icon: 'icons/economic-aid.svg', color: '#C75746', bcolor: '#935B3B' }, // 公債費
+  // その他
+  '8': { icon: 'icons/money.svg', color: '#C75746', bcolor: '#935B3B' },
+  '801': { icon: 'icons/publicaffairs.svg', color: '#C75746', bcolor: '#935B3B' }, // 総務費
+  '802': { icon: 'icons/money.svg', color: '#C75746', bcolor: '#935B3B' }, // 諸支出金
+  '803': { icon: 'icons/pig.svg', color: '#C75746', bcolor: '#935B3B' }, // 予備費
+
 };
 
 
