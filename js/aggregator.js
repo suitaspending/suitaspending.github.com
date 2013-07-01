@@ -199,7 +199,7 @@ var OpenSpending = OpenSpending || {};
             // Initialize a new node and add it to the parent node
             node = node_template;
             node.children = [];
-            node[self.config.measure] = entry[self.config.measure];
+            node[self.config.measure] = 0.0;
             node.color = current ? current.color : undefined;
             node.level = level;
             node.breakdowns = {};
@@ -208,13 +208,13 @@ var OpenSpending = OpenSpending || {};
             nodes[node.id] = node;
           }
 
-//          node[self.config.measure] = node[self.config.measure] + entry[self.config.measure];
+          node[self.config.measure] = node[self.config.measure] + entry[self.config.measure];
 
           // Add the current amount and the breakdown to the root node
           // to have a total.
           if (level === 1) {
             nodes.root[self.config.measure] = nodes.root[self.config.measure] + entry[self.config.measure];
-//            self.addBreakdown(nodes.root, entry);
+            self.addBreakdown(nodes.root, entry);
           }
 
           // update the breakdown for the current node
