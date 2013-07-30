@@ -6,6 +6,8 @@ var dependentType = 'single'; // 世帯タイプ初期値
 var baseKoujo = Taxes.baseKoujo; // 住民税基礎控除
 var huyoKoujo = Taxes.huyoKoujo; // 一人分の扶養控除
 var taxRate = Taxes.taxRate; // 住民税率
+var haigusyaKoujo = 380000; // 配偶者控除
+var perCapita = 3000; // 均等割
 
 var formatCurrency = function (val, prec, sym, dec, sep) {
   prec = prec === undefined ? 2 : prec
@@ -111,8 +113,23 @@ OpenSpending.DailyBread = function (elem) {
   }
 
   this.setSalary = function (salary) {
+    var allowances = baseKoujo,
+        income = calcEmploymentIncome(salary),
+        taxable = 0,
+        tax = 0;
+    if (dependentType === 'family') {
+      allowances += huyoKoujo + haigusyaKoujo;
+    }
+    taxable = Math.floor((income - allowances) / 1000) * 1000;
+    if (taxable > 0) {
+      tax = perCapita + Math.floor(taxable * taxRate / 100) * 100;
+    } else {
+      tax = perCapita;
+    }
+
     self.salaryVal = salary
-    self.taxVal = (salary - (baseKoujo + (dependentType == 'family' ? huyoKoujo : 0))) * taxRate;
+    self.taxVal = tax;
+    self.percentage = Math.round((tax / salary) * 10000) / 100;
   }
 
   this.draw = function () {
@@ -126,6 +143,7 @@ OpenSpending.DailyBread = function (elem) {
   this.drawTotals = function () {
     $('#db-salary p').text(formatCurrency(self.salaryVal, 0))
     $('#db-tax p').text(formatCurrency(self.taxVal, 0))
+    $('#db-percentage').text(self.percentage);
   }
 
   this.drawTier = function (tierId) {
@@ -216,7 +234,28 @@ OpenSpending.DailyBread = function (elem) {
       });
     });
   }
-
+  
+  function calcEmploymentIncome(salary) {
+    var income = 0;
+    if (salary <= 1800000) {
+      income = salary - salary * 0.4;
+      if (salary * 0.4 < 650000) {
+        income = salary - 650000;
+      }
+    } else if (salary <= 3600000) {
+      income = salary - salary * 0.3 + 180000;
+    } else if (salary <= 6600000) {
+      income = salary - salary * 0.2 + 540000;
+    } else if (salary <= 10000000) {
+      income = salary - salary * 0.1 + 1200000;
+    } else if (salary <= 15000000) {
+      income = salary - salary * 0.05 + 1700000;
+    } else {
+      income = salary - 2450000;
+    }
+    return Math.floor(income)
+  }
+  
   this.init()
   return this
 }
