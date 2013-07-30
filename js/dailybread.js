@@ -237,21 +237,28 @@ OpenSpending.DailyBread = function (elem) {
   
   function calcEmploymentIncome(salary) {
     var income = 0;
-    if (salary <= 1800000) {
-      income = salary - salary * 0.4;
-      if (salary * 0.4 < 650000) {
-        income = salary - 650000;
-      }
-    } else if (salary <= 3600000) {
-      income = salary - salary * 0.3 + 180000;
-    } else if (salary <= 6600000) {
-      income = salary - salary * 0.2 + 540000;
-    } else if (salary <= 10000000) {
-      income = salary - salary * 0.1 + 1200000;
-    } else if (salary <= 15000000) {
-      income = salary - salary * 0.05 + 1700000;
+    if (salary < 651000) {
+      income = 0;
+    } else if (salary < 1619000) {
+      income = salary - 650000;
+    } else if (salary < 1620000) {
+      income = 969000;
+    } else if (salary < 1622000) {
+      income = 970000;
+    } else if (salary < 1624000) {
+      income = 972000;
+    } else if (salary < 1628000) {
+      income = 974000;
+    } else if (salary < 1800000) {
+      income = Math.floor(salary / 4000) * 4000 * 0.6;
+    } else if (salary < 3600000) {
+      income = Math.floor(salary / 4000) * 4000 * 0.7 - 180000;
+    } else if (salary < 6600000) {
+      income = Math.floor(salary / 4000) * 4000 * 0.8 - 540000;
+    } else if (salary < 10000000) {
+      income = salary * 0.9 - 1200000;
     } else {
-      income = salary - 2450000;
+      income = salary * 0.95 - 1700000;
     }
     return Math.floor(income)
   }
