@@ -6,8 +6,8 @@ var dependentType = 'single'; // 世帯タイプ初期値
 var baseKoujo = Taxes.baseKoujo; // 住民税基礎控除
 var huyoKoujo = Taxes.huyoKoujo; // 一人分の扶養控除
 var taxRate = Taxes.taxRate; // 住民税率
-var haigusyaKoujo = 380000; // 配偶者控除
-var perCapita = 3000; // 均等割
+var haigusyaKoujo = Taxes.haigusyaKoujo; // 配偶者控除
+var perCapita = Taxes.perCapita; // 均等割
 
 var formatCurrency = function (val, prec, sym, dec, sep) {
   prec = prec === undefined ? 2 : prec
@@ -113,9 +113,10 @@ OpenSpending.DailyBread = function (elem) {
   }
 
   this.setSalary = function (salary) {
-    var allowances = baseKoujo,
+    var allowances = baseKoujo + calcSocialInsuranceAllowances(salary),
         income = calcEmploymentIncome(salary),
-        taxable = 0,
+        vat = calcVAT(salary),
+        taxable = 0, // 課税所得金額
         tax = 0;
     if (dependentType === 'family') {
       allowances += huyoKoujo + haigusyaKoujo;
@@ -126,6 +127,7 @@ OpenSpending.DailyBread = function (elem) {
     } else {
       tax = perCapita;
     }
+    tax += vat;
 
     self.salaryVal = salary
     self.taxVal = tax;
@@ -234,7 +236,7 @@ OpenSpending.DailyBread = function (elem) {
       });
     });
   }
-  
+
   function calcEmploymentIncome(salary) {
     var income = 0;
     if (salary < 651000) {
@@ -262,7 +264,15 @@ OpenSpending.DailyBread = function (elem) {
     }
     return Math.floor(income)
   }
-  
+
+  function calcSocialInsuranceAllowances(salary) {
+    return Math.floor(salary * Taxes.socialInsuranceRate) + Math.floor(salary * Taxes.nursingCareInsuranceRate);
+  }
+
+  function calcVAT(salary) {
+    return Math.floor(salary * Taxes.consumptionSpendingRate * Taxes.vatRate / 2); // 地方消費税のうち、1/2が市町村に交付される
+  }
+
   this.init()
   return this
 }

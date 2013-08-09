@@ -6,7 +6,13 @@ var Taxes = Taxes || {};
 
 Taxes.baseKoujo = 330000; // 住民税基礎控除
 Taxes.huyoKoujo = 330000; // 一人分の扶養控除
+Taxes.haigusyaKoujo = 380000; // 配偶者控除
 Taxes.taxRate = 0.06; // 住民税率
+Taxes.vatRate = 0.01; // 地方消費税率（消費税4％・地方消費税1％）
+Taxes.consumptionSpendingRate = 0.6; // 消費支出割合
+Taxes.perCapita = 3000; // 均等割
+Taxes.socialInsuranceRate = 0.1006; // 大阪府の平成25年度一般保険料率（http://www.kyoukaikenpo.or.jp/g3/cat330/1936-295）
+Taxes.nursingCareInsuranceRate = 0.0155; // 平成25年度の介護保険料率（http://www.kyoukaikenpo.or.jp/g3/cat330/1995-298）
 
 var OpenSpending = OpenSpending || {};
 
